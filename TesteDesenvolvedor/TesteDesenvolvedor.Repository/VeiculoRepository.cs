@@ -8,24 +8,24 @@ using TesteDesenvolvedor.Repository.Generic;
 using TesteDesenvolvedor.Repository.Interface;
 
 namespace TesteDesenvolvedor.Repository
-{
+{Async
     public class VeiculoRepository : GenericRepository, IVeiculoRepository
     {
         public VeiculoRepository(DataContext context) : base (context){}
         
-        public async Task<Veiculo> FindById(int id)
+        public async Task<Veiculo> FindByIdAsync(int id)
         {
             var result = await _context.Veiculos.SingleOrDefaultAsync(l => l.Id.Equals(id));
             return result;
         }
 
-        public async Task<List<Veiculo>> GetAll()
+        public async Task<List<Veiculo>> GetAllAsync()
         {
             var result = await _context.Veiculos.Include(p => p.Linha).AsNoTracking().ToListAsync();
             return result;
         }
 
-        public async Task<List<Veiculo>> FindAllVeiculosByLinhas(int linhaId)
+        public async Task<List<Veiculo>> FindAllVeiculosByLinhasAsync(int linhaId)
         {
             var result = await _context.Veiculos
                     .Include(p => p.Linha)

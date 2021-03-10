@@ -7,8 +7,8 @@ namespace TesteDesenvolvedor.Repository.Interface
 {
     public interface ILinhaRepository : IRepository
     {
-        Task<Linha> FindById(int id);
-        Task<List<Linha>> GetAll();
-        Task<List<Linha>> FindAllLinhasByParadas(int paradaId);
+        Task<Linha> FindByIdAsync(int id);
+        Task<List<Linha>> GetAllAsync();
+        Task<List<Linha>> FindAllLinhasByParadasAsync(int paradaId);
     }
 }

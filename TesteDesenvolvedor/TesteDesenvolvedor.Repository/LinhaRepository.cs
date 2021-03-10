@@ -13,19 +13,19 @@ namespace TesteDesenvolvedor.Repository
     {
         public LinhaRepository(DataContext context) : base (context){}
         
-        public async Task<Linha> FindById(int id)
+        public async Task<Linha> FindByIdAsync(int id)
         {
             var result = await _context.Linhas.SingleOrDefaultAsync(l => l.Id.Equals(id));
             return result;
         }
 
-        public async Task<List<Linha>> GetAll()
+        public async Task<List<Linha>> GetAllAsync()
         {
             var result = await _context.Linhas.Include(p => p.Paradas).AsNoTracking().ToListAsync();
             return result;
         }
 
-        public async Task<List<Linha>> FindAllLinhasByParadas(int paradaId)
+        public async Task<List<Linha>> FindAllLinhasByParadasAsync(int paradaId)
         {
             var result = await _context.Linhas
                     .Include(p => p.Paradas)

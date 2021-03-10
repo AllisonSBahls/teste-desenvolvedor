@@ -7,7 +7,7 @@ namespace TesteDesenvolvedor.Repository.Interface
 {
     public interface IParadaRepository : IRepository
     {
-        Task<Parada> FindById(int id);
-        Task<List<Parada>> GetAll();
+        Task<Parada> FindByIdAsync(int id);
+        Task<List<Parada>> GetAllAsync();
     }
 }
