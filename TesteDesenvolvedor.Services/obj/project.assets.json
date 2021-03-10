@@ -1,0 +1,116 @@
+{
+  "version": 3,
+  "targets": {
+    "net5.0": {
+      "TesteDesenvolvedor.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/TesteDesenvolvedor.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TesteDesenvolvedor.Domain.dll": {}
+        }
+      },
+      "TesteDesenvolvedor.Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "TesteDesenvolvedor.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TesteDesenvolvedor.Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TesteDesenvolvedor.Repository.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TesteDesenvolvedor.Domain/1.0.0": {
+      "type": "project",
+      "path": "../TesteDesenvolvedor.Domain/TesteDesenvolvedor.Domain.csproj",
+      "msbuildProject": "../TesteDesenvolvedor.Domain/TesteDesenvolvedor.Domain.csproj"
+    },
+    "TesteDesenvolvedor.Repository/1.0.0": {
+      "type": "project",
+      "path": "../TesteDesenvolvedor.Repository/TesteDesenvolvedor.Repository.csproj",
+      "msbuildProject": "../TesteDesenvolvedor.Repository/TesteDesenvolvedor.Repository.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net5.0": [
+      "TesteDesenvolvedor.Domain >= 1.0.0",
+      "TesteDesenvolvedor.Repository >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Pichau\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Projetos\\Aiko\\TesteDesenvolvedor.Services\\TesteDesenvolvedor.Services.csproj",
+      "projectName": "TesteDesenvolvedor.Services",
+      "projectPath": "C:\\Projetos\\Aiko\\TesteDesenvolvedor.Services\\TesteDesenvolvedor.Services.csproj",
+      "packagesPath": "C:\\Users\\Pichau\\.nuget\\packages\\",
+      "outputPath": "C:\\Projetos\\Aiko\\TesteDesenvolvedor.Services\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Pichau\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net5.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "projectReferences": {
+            "C:\\Projetos\\Aiko\\TesteDesenvolvedor.Domain\\TesteDesenvolvedor.Domain.csproj": {
+              "projectPath": "C:\\Projetos\\Aiko\\TesteDesenvolvedor.Domain\\TesteDesenvolvedor.Domain.csproj"
+            },
+            "C:\\Projetos\\Aiko\\TesteDesenvolvedor.Repository\\TesteDesenvolvedor.Repository.csproj": {
+              "projectPath": "C:\\Projetos\\Aiko\\TesteDesenvolvedor.Repository\\TesteDesenvolvedor.Repository.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net5.0": {
+        "targetAlias": "net5.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\bin\Debug\net5.0\TesteDesenvolvedor.Services.deps.json
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\bin\Debug\net5.0\TesteDesenvolvedor.Services.dll
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\bin\Debug\net5.0\ref\TesteDesenvolvedor.Services.dll
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\bin\Debug\net5.0\TesteDesenvolvedor.Services.pdb
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\bin\Debug\net5.0\TesteDesenvolvedor.Domain.dll
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\bin\Debug\net5.0\TesteDesenvolvedor.Repository.dll
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\bin\Debug\net5.0\TesteDesenvolvedor.Domain.pdb
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\bin\Debug\net5.0\TesteDesenvolvedor.Repository.pdb
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\obj\Debug\net5.0\TesteDesenvolvedor.Services.csprojAssemblyReference.cache
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\obj\Debug\net5.0\TesteDesenvolvedor.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\obj\Debug\net5.0\TesteDesenvolvedor.Services.AssemblyInfoInputs.cache
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\obj\Debug\net5.0\TesteDesenvolvedor.Services.AssemblyInfo.cs
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\obj\Debug\net5.0\TesteDesenvolvedor.Services.csproj.CoreCompileInputs.cache
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\obj\Debug\net5.0\TesteDesenvolvedor.Services.csproj.CopyComplete
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\obj\Debug\net5.0\TesteDesenvolvedor.Services.dll
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\obj\Debug\net5.0\ref\TesteDesenvolvedor.Services.dll
+C:\Projetos\Aiko\TesteDesenvolvedor.Services\obj\Debug\net5.0\TesteDesenvolvedor.Services.pdb
