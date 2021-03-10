@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using TesteDesenvolvedor.Repository.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace TesteDesenvolvedor.API
 {
@@ -27,10 +29,20 @@ namespace TesteDesenvolvedor.API
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection")));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Teste de Desenvolvedor .NET AIKO", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { 
+                    Title = "Teste de Desenvolvedor .NET AIKO", 
+                    Version = "v1", 
+                    Description = "API desenvolvida para o teste de desenvolvedor .NET na AIKO Digital",
+                    Contact = new OpenApiContact
+                        {
+                            Name = "Allison Sousa Bahls",
+                            Url = new Uri("https://github.com/AllisonSBahls")
+                        } });
             });
         }
 

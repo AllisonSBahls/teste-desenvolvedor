@@ -218,7 +218,6 @@ _pkginfo.txt
 *.[Cc]ache
 # but keep track of directories ending in .cache
 !?*.[Cc]ache/
-/TesteDesendolvedor.API/bin
 
 # Others
 ClientBin/
@@ -349,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Project
