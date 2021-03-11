@@ -13,7 +13,7 @@ namespace TesteDesenvolvedor.Repository
 
         public ParadaRepository(DataContext context) : base(context){}
         
-        public async Task<Parada> FindByIdAsync(int id)
+        public async Task<Parada> FindByIdAsync(long id)
         {
             var result = await _context.Paradas.SingleOrDefaultAsync(l => l.Id.Equals(id));
             return result;

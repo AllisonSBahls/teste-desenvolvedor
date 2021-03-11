@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TesteDesenvolvedor.Domain;
 
@@ -5,11 +6,12 @@ namespace TesteDesenvolvedor.Services.Interface
 {
     public interface ILinhaService
     {
-     Task<Linha> AddLinha(Linha linha);
-     Task<Linha> UpdateLinha(int id, Linha linha);
-     Task<Linha> DeleteLinha(int id);
-     Task<Linha> FindByIdLinha(int id);
-        Task<List<Linha>> GetAll();
-        Task<List<Linha>> FindAllLinhasByParadas(int paradaId);
+        Task<Linha> FindByIdLinhaAsync(long id);
+        Task<List<Linha>> GetAllLinhasAsync();
+        Task<Linha> AddLinhaAsync(Linha linha);
+        Task<Linha> UpdateLinhaAsync(long id, Linha linha);
+        Task<bool> DeleteLinhaAsync(long id);
+        Task<List<Linha>> FindAllLinhasByParadasAsync(long paradaId);
+
     }
 }

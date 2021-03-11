@@ -13,7 +13,7 @@ namespace TesteDesenvolvedor.Repository
     {
         public LinhaRepository(DataContext context) : base (context){}
         
-        public async Task<Linha> FindByIdAsync(int id)
+        public async Task<Linha> FindByIdAsync(long id)
         {
             var result = await _context.Linhas.SingleOrDefaultAsync(l => l.Id.Equals(id));
             return result;
@@ -25,7 +25,7 @@ namespace TesteDesenvolvedor.Repository
             return result;
         }
 
-        public async Task<List<Linha>> FindAllLinhasByParadasAsync(int paradaId)
+        public async Task<List<Linha>> FindAllLinhasByParadasAsync(long paradaId)
         {
             var result = await _context.Linhas
                     .Include(p => p.Paradas)
