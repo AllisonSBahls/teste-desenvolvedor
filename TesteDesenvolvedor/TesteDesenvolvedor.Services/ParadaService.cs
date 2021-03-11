@@ -81,8 +81,10 @@ namespace TesteDesenvolvedor.Services
         {
             try{
                 var result = await _repository.FindByIdAsync(id);
-                if (result == null) throw new Exception("Parada não encontrada");
+                                Console.WriteLine(result.Name);
 
+                if (result == null) throw new Exception("Parada não encontrada");
+                
                 parada.Id = result.Id;
                 _repository.Update(parada);
                 if(await _repository.SaveChangesAsync()){

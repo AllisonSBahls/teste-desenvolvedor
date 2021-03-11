@@ -3,32 +3,29 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TesteDesenvolvedor.Repository.Context;
 
 namespace TesteDesenvolvedor.Repository.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210311153250_initial")]
+    [Migration("20210311182943_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityByDefaultColumns()
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.2");
+                .HasAnnotation("ProductVersion", "3.1.13")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("TesteDesenvolvedor.Domain.Linha", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -54,17 +51,16 @@ namespace TesteDesenvolvedor.Repository.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("bigint");
 
                     b.Property<double>("Latitude")
-                        .HasColumnType("double precision");
+                        .HasColumnType("double");
 
                     b.Property<double>("Longitude")
-                        .HasColumnType("double precision");
+                        .HasColumnType("double");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -74,10 +70,10 @@ namespace TesteDesenvolvedor.Repository.Migrations
             modelBuilder.Entity("TesteDesenvolvedor.Domain.PosicaoVeiculo", b =>
                 {
                     b.Property<double>("Latitude")
-                        .HasColumnType("double precision");
+                        .HasColumnType("double");
 
                     b.Property<double>("Longitude")
-                        .HasColumnType("double precision");
+                        .HasColumnType("double");
 
                     b.Property<long>("VeiculoId")
                         .HasColumnType("bigint");
@@ -91,17 +87,16 @@ namespace TesteDesenvolvedor.Repository.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("bigint");
 
                     b.Property<long>("LinhaId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Modelo")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -123,10 +118,6 @@ namespace TesteDesenvolvedor.Repository.Migrations
                         .HasForeignKey("ParadaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Linha");
-
-                    b.Navigation("Parada");
                 });
 
             modelBuilder.Entity("TesteDesenvolvedor.Domain.PosicaoVeiculo", b =>
@@ -136,8 +127,6 @@ namespace TesteDesenvolvedor.Repository.Migrations
                         .HasForeignKey("VeiculoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Veiculo");
                 });
 
             modelBuilder.Entity("TesteDesenvolvedor.Domain.Veiculo", b =>
@@ -147,20 +136,6 @@ namespace TesteDesenvolvedor.Repository.Migrations
                         .HasForeignKey("LinhaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Linha");
-                });
-
-            modelBuilder.Entity("TesteDesenvolvedor.Domain.Linha", b =>
-                {
-                    b.Navigation("LinhasParadas");
-
-                    b.Navigation("Veiculos");
-                });
-
-            modelBuilder.Entity("TesteDesenvolvedor.Domain.Parada", b =>
-                {
-                    b.Navigation("LinhaParadas");
                 });
 #pragma warning restore 612, 618
         }

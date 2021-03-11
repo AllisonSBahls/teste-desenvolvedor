@@ -21,6 +21,8 @@ namespace TesteDesenvolvedor.Repository.Context
 
             modelBuilder.Entity<LinhaParada>()
                 .HasKey(LP => new {LP.LinhaId, LP.ParadaId});
+
+            modelBuilder.Entity<Linha>().HasKey(g => new { g.Id });
         }
 
     }

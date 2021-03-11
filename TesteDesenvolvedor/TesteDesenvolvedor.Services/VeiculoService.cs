@@ -32,13 +32,13 @@ namespace TesteDesenvolvedor.Services
         }
 
 
-        public async Task<Veiculo> AddVeiculoAsync(Veiculo Veiculo)
+        public async Task<Veiculo> AddVeiculoAsync(Veiculo veiculo)
         {
             try
             {
-                _repository.Add(Veiculo);
+                _repository.Add(veiculo);
                 return await _repository.SaveChangesAsync() ?
-                    await _repository.FindByIdAsync(Veiculo.Id) :
+                    await _repository.FindByIdAsync(veiculo.Id) :
                     null;
 
             }
@@ -98,7 +98,7 @@ namespace TesteDesenvolvedor.Services
                 var result = await _repository.FindByIdAsync(id);
                 if (result == null) throw new Exception("Veiculo não encontrado");
 
-                  veiculo.Id = result.Id;
+                veiculo.Id = result.Id;
                 _repository.Update(veiculo);
                 if(await _repository.SaveChangesAsync()){
                     return await _repository.FindByIdAsync(id);

@@ -15,7 +15,7 @@ namespace TesteDesenvolvedor.Repository
         
         public async Task<Parada> FindByIdAsync(long id)
         {
-            var result = await _context.Paradas.SingleOrDefaultAsync(l => l.Id.Equals(id));
+            var result = await _context.Paradas.AsNoTracking().SingleOrDefaultAsync(p => p.Id.Equals(id));
             return result;
         }
 

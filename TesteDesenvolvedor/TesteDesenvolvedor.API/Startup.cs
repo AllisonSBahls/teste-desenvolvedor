@@ -34,7 +34,7 @@ namespace TesteDesenvolvedor.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection")));
+            services.AddDbContext<DataContext>(options => options.UseMySql(Configuration.GetConnectionString("MySQLConnection")));
 
             services.AddControllers()
                 .AddNewtonsoftJson( 

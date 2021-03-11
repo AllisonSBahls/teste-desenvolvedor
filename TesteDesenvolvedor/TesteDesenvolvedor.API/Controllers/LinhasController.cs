@@ -45,10 +45,9 @@ namespace TesteDesenvolvedor.API.Controllers
             }
         }
 
-        [HttpGet("parada/{id}")]
+        [HttpGet("parada/{paradaId}")]
         public async Task<IActionResult> GetLinhasByParadas(long paradaId){
             try {
-                
                 var result = await _service.FindAllLinhasByParadasAsync(paradaId);
                 if(result == null) return NotFound("Nenhuma linha encontrada");
                 return Ok(result);

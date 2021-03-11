@@ -15,7 +15,7 @@ namespace TesteDesenvolvedor.Repository
         
         public async Task<Veiculo> FindByIdAsync(long id)
         {
-            var result = await _context.Veiculos.SingleOrDefaultAsync(l => l.Id.Equals(id));
+            var result = await _context.Veiculos.AsNoTracking().SingleOrDefaultAsync(l => l.Id.Equals(id));
             return result;
         }
 

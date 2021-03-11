@@ -23,7 +23,7 @@ namespace TesteDesenvolvedor.API.Controllers
         {
             try
             {
-                var result = await _service.FindAllVeiculosByLinhasAsync(id);
+                var result = await _service.FindByIdVeiculoAsync(id);
                 if (result == null) return NotFound("Veiculo não encontrado");
 
                 return Ok(result);

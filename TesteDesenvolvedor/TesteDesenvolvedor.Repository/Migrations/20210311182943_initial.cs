@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TesteDesenvolvedor.Repository.Migrations
 {
@@ -11,9 +11,9 @@ namespace TesteDesenvolvedor.Repository.Migrations
                 name: "Linhas",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -24,11 +24,11 @@ namespace TesteDesenvolvedor.Repository.Migrations
                 name: "Paradas",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    Latitude = table.Column<double>(type: "double precision", nullable: false),
-                    Longitude = table.Column<double>(type: "double precision", nullable: false)
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Latitude = table.Column<double>(nullable: false),
+                    Longitude = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,11 +39,11 @@ namespace TesteDesenvolvedor.Repository.Migrations
                 name: "Veiculos",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    Modelo = table.Column<string>(type: "text", nullable: true),
-                    LinhaId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Modelo = table.Column<string>(nullable: true),
+                    LinhaId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,8 +60,8 @@ namespace TesteDesenvolvedor.Repository.Migrations
                 name: "LinhasParadas",
                 columns: table => new
                 {
-                    LinhaId = table.Column<long>(type: "bigint", nullable: false),
-                    ParadaId = table.Column<long>(type: "bigint", nullable: false)
+                    LinhaId = table.Column<long>(nullable: false),
+                    ParadaId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,9 +84,9 @@ namespace TesteDesenvolvedor.Repository.Migrations
                 name: "PosicaoVeiculos",
                 columns: table => new
                 {
-                    Latitude = table.Column<double>(type: "double precision", nullable: false),
-                    Longitude = table.Column<double>(type: "double precision", nullable: false),
-                    VeiculoId = table.Column<long>(type: "bigint", nullable: false)
+                    Latitude = table.Column<double>(nullable: false),
+                    Longitude = table.Column<double>(nullable: false),
+                    VeiculoId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {

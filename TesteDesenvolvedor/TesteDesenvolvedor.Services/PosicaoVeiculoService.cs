@@ -82,7 +82,7 @@ namespace TesteDesenvolvedor.Services
                 var result = await _repository.FindByIdAsync(veiculoId);
                 if (result == null) throw new Exception("PosicaoVeiculo não encontrada");
 
-               posicaoVeiculo.VeiculoId = result.VeiculoId;
+                posicaoVeiculo.VeiculoId = result.VeiculoId;
                 _repository.Update(posicaoVeiculo);
                 if(await _repository.SaveChangesAsync()){
                     return await _repository.FindByIdAsync(veiculoId);

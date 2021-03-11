@@ -66,7 +66,6 @@ namespace TesteDesenvolvedor.Services
         public async Task<List<Linha>> FindAllLinhasByParadasAsync(long paradaId)
         {
            try{
-
                var result = await _repository.FindAllLinhasByParadasAsync(paradaId);
                if (result == null) return null;
                return result;
@@ -97,7 +96,7 @@ namespace TesteDesenvolvedor.Services
             try{
                 var result = await _repository.FindByIdAsync(id);
                 if (result == null) throw new Exception("Linha não encontrada");
-
+                
                 linha.Id = result.Id;
                 _repository.Update(linha);
                 if(await _repository.SaveChangesAsync()){
