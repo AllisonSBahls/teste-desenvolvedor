@@ -77,13 +77,14 @@ namespace TesteDesenvolvedor.Services
             }
         }
 
-        public async Task<Parada> UpdateParadaAsync(long id, Parada Parada)
+        public async Task<Parada> UpdateParadaAsync(long id, Parada parada)
         {
             try{
                 var result = await _repository.FindByIdAsync(id);
                 if (result == null) throw new Exception("Parada não encontrada");
 
-                _repository.Update(result, Parada);
+                parada.Id = result.Id;
+                _repository.Update(parada);
                 if(await _repository.SaveChangesAsync()){
                     return await _repository.FindByIdAsync(id);
                 }

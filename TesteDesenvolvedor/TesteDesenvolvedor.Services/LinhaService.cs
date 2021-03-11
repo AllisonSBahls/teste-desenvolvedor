@@ -98,7 +98,8 @@ namespace TesteDesenvolvedor.Services
                 var result = await _repository.FindByIdAsync(id);
                 if (result == null) throw new Exception("Linha não encontrada");
 
-                _repository.Update(result, linha);
+                linha.Id = result.Id;
+                _repository.Update(linha);
                 if(await _repository.SaveChangesAsync()){
                     return await _repository.FindByIdAsync(id);
                 }

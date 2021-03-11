@@ -9,7 +9,7 @@ namespace TesteDesenvolvedor.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ParadasController: ControllerBase
+    public class ParadasController : ControllerBase
     {
         private readonly IParadaService _service;
 
@@ -28,6 +28,19 @@ namespace TesteDesenvolvedor.API.Controllers
             }catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao procurar a Parada: {ex.Message} ");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get(){
+            try{
+                var result = await _service.GetAllParadasAsync();
+                if (result == null) return NotFound("Nenhuma parada encontrada");
+
+                return Ok(result);
+            }catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao procurar as Paradas: {ex.Message} ");
             }
         }
 
@@ -57,6 +70,20 @@ namespace TesteDesenvolvedor.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro em atualizar as informações da parada: {ex.Message} ");
+            }
+        }
+         [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(long id)
+        {
+            try
+            {
+                return await _service.DeleteParadaAsync(id) ? 
+                    Ok("Deletado") : 
+                    BadRequest("Não foi possivel deletar a Parada");
+;
+            }catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao deletar a Parada: {ex.Message}");
             }
         }
     }

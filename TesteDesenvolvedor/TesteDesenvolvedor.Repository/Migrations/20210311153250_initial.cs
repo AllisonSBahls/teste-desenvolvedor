@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace TesteDesenvolvedor.Repository.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +13,7 @@ namespace TesteDesenvolvedor.Repository.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    ParadaId = table.Column<long>(type: "bigint", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -29,18 +28,11 @@ namespace TesteDesenvolvedor.Repository.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
-                    Longitude = table.Column<double>(type: "double precision", nullable: false),
-                    LinhaId = table.Column<long>(type: "bigint", nullable: true)
+                    Longitude = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Paradas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Paradas_Linhas_LinhaId",
-                        column: x => x.LinhaId,
-                        principalTable: "Linhas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,33 +57,56 @@ namespace TesteDesenvolvedor.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LinhasParadas",
+                columns: table => new
+                {
+                    LinhaId = table.Column<long>(type: "bigint", nullable: false),
+                    ParadaId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LinhasParadas", x => new { x.LinhaId, x.ParadaId });
+                    table.ForeignKey(
+                        name: "FK_LinhasParadas_Linhas_LinhaId",
+                        column: x => x.LinhaId,
+                        principalTable: "Linhas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LinhasParadas_Paradas_ParadaId",
+                        column: x => x.ParadaId,
+                        principalTable: "Paradas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PosicaoVeiculos",
                 columns: table => new
                 {
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false),
-                    VeiculoId = table.Column<double>(type: "double precision", nullable: false),
-                    VeiculoId1 = table.Column<long>(type: "bigint", nullable: true)
+                    VeiculoId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.ForeignKey(
-                        name: "FK_PosicaoVeiculos_Veiculos_VeiculoId1",
-                        column: x => x.VeiculoId1,
+                        name: "FK_PosicaoVeiculos_Veiculos_VeiculoId",
+                        column: x => x.VeiculoId,
                         principalTable: "Veiculos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Paradas_LinhaId",
-                table: "Paradas",
-                column: "LinhaId");
+                name: "IX_LinhasParadas_ParadaId",
+                table: "LinhasParadas",
+                column: "ParadaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PosicaoVeiculos_VeiculoId1",
+                name: "IX_PosicaoVeiculos_VeiculoId",
                 table: "PosicaoVeiculos",
-                column: "VeiculoId1");
+                column: "VeiculoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Veiculos_LinhaId",
@@ -102,10 +117,13 @@ namespace TesteDesenvolvedor.Repository.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Paradas");
+                name: "LinhasParadas");
 
             migrationBuilder.DropTable(
                 name: "PosicaoVeiculos");
+
+            migrationBuilder.DropTable(
+                name: "Paradas");
 
             migrationBuilder.DropTable(
                 name: "Veiculos");

@@ -36,7 +36,10 @@ namespace TesteDesenvolvedor.API
 
             services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection")));
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson( 
+                    x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
 
             services.AddScoped<IParadaService, ParadaService>();
             services.AddScoped<ILinhaService, LinhaService>();

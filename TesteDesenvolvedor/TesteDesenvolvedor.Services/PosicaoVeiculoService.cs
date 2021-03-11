@@ -14,11 +14,11 @@ namespace TesteDesenvolvedor.Services
         {
             _repository = repository;
         }
-        public async Task<PosicaoVeiculo> FindByIdPosicaoVeiculoAsync(double id)
+        public async Task<PosicaoVeiculo> FindByIdPosicaoVeiculoAsync(long veiculoId)
         {
             try
             {
-                var result = await _repository.FindByIdAsync(id);
+                var result = await _repository.FindByIdAsync(veiculoId);
                 if (result == null) return null;
 
                 return result;
@@ -47,7 +47,7 @@ namespace TesteDesenvolvedor.Services
             }
         }
 
-        public async Task<bool> DeletePosicaoVeiculoAsync(double veiculoId)
+        public async Task<bool> DeletePosicaoVeiculoAsync(long veiculoId)
         {
            try{
                var result = await _repository.FindByIdAsync(veiculoId);
@@ -76,15 +76,16 @@ namespace TesteDesenvolvedor.Services
             }
         }
 
-        public async Task<PosicaoVeiculo> UpdatePosicaoVeiculoAsync(double id, PosicaoVeiculo PosicaoVeiculo)
+        public async Task<PosicaoVeiculo> UpdatePosicaoVeiculoAsync(long veiculoId, PosicaoVeiculo posicaoVeiculo)
         {
             try{
-                var result = await _repository.FindByIdAsync(id);
+                var result = await _repository.FindByIdAsync(veiculoId);
                 if (result == null) throw new Exception("PosicaoVeiculo não encontrada");
 
-                _repository.Update(result, PosicaoVeiculo);
+               posicaoVeiculo.VeiculoId = result.VeiculoId;
+                _repository.Update(posicaoVeiculo);
                 if(await _repository.SaveChangesAsync()){
-                    return await _repository.FindByIdAsync(id);
+                    return await _repository.FindByIdAsync(veiculoId);
                 }
                 return null;
             }catch (Exception ex)

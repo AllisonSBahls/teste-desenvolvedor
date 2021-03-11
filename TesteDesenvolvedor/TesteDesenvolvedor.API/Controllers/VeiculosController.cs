@@ -1,7 +1,113 @@
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using TesteDesenvolvedor.Domain;
+using TesteDesenvolvedor.Services.Interface;
+
 namespace TesteDesenvolvedor.API.Controllers
 {
-    public class VeiculosController
+    [ApiController]
+    [Route("[controller]")]
+    public class VeiculosController : ControllerBase
     {
-        
+        private readonly IVeiculoService _service;
+
+        public VeiculosController(IVeiculoService service)
+        {
+            _service = service;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(long id)
+        {
+            try
+            {
+                var result = await _service.FindAllVeiculosByLinhasAsync(id);
+                if (result == null) return NotFound("Veiculo não encontrado");
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao procurar o Veiculo: {ex.Message} ");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                var result = await _service.GetAllVeiculosAsync();
+                if (result == null) return NotFound("Nenhuma Veiculo encontrado");
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao procurar os Veiculos: {ex.Message} ");
+            }
+        }
+
+        [HttpGet("linha/{linhaId}")]
+        public async Task<IActionResult> GetVeiculosByLinha(long linhaId){
+            try
+            {
+                var result = await _service.FindAllVeiculosByLinhasAsync(linhaId);
+                if (result == null) return NotFound("Nenhuma Veiculo encontrado");
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao procurar os Veiculos: {ex.Message} ");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(Veiculo veiculo)
+        {
+            try
+            {
+                var result = await _service.AddVeiculoAsync(veiculo);
+                if (result == null) return BadRequest("Erro ao cadastrar o Veiculo");
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao cadastrar o Veiculo: {ex.Message} ");
+            }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(long id, Veiculo veiculo)
+        {
+            try
+            {
+                var result = await _service.UpdateVeiculoAsync(id, veiculo);
+                if (result == null) return BadRequest("Erro em alterar os dados do Veiculo");
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro em atualizar as informações do Veiculo: {ex.Message} ");
+            }
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(long id)
+        {
+            try
+            {
+                return await _service.DeleteVeiculoAsync(id) ?
+                    Ok("Deletado") :
+                    BadRequest("Não foi possivel deletar o Veiculo");
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao deletar o Veiculo: {ex.Message}");
+            }
+        }
     }
 }

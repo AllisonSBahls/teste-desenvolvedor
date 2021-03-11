@@ -13,9 +13,9 @@ namespace TesteDesenvolvedor.Repository
 
         public PosicaoVeiculoRepository(DataContext context) : base(context){}
         
-        public async Task<PosicaoVeiculo> FindByIdAsync(double id)
+        public async Task<PosicaoVeiculo> FindByIdAsync(long VeiculoId)
         {
-            var result = await _context.PosicaoVeiculos.SingleOrDefaultAsync(l => l.VeiculoId.Equals(id));
+            var result = await _context.PosicaoVeiculos.SingleOrDefaultAsync(l => l.VeiculoId.Equals(VeiculoId));
             return result;
         }
 

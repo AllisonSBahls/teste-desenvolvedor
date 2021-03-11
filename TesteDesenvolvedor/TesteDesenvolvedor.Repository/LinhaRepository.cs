@@ -21,16 +21,20 @@ namespace TesteDesenvolvedor.Repository
 
         public async Task<List<Linha>> GetAllAsync()
         {
-            var result = await _context.Linhas.Include(p => p.Paradas).AsNoTracking().ToListAsync();
+            var result = await _context.Linhas
+                    .Include(x => x.LinhasParadas)
+                    .ThenInclude(p => p.Parada).AsNoTracking()
+                    .ToListAsync();
             return result;
         }
 
         public async Task<List<Linha>> FindAllLinhasByParadasAsync(long paradaId)
         {
             var result = await _context.Linhas
-                    .Include(p => p.Paradas)
-                    .Where(p => p.ParadaId.Equals(paradaId)).AsNoTracking()
-                    .ToListAsync();
+                    .Include(x => x.LinhasParadas)
+                    .ThenInclude(p => p.Parada).AsNoTracking()
+                    .Where(p => p.LinhasParadas.All(x => x.Parada.Id.Equals(paradaId)))
+                    .ToListAsync(); 
             return result;
         }
 

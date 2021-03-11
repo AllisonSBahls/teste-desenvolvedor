@@ -30,17 +30,76 @@ namespace TesteDesenvolvedor.API.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao procurar a linha: {ex.Message} ");
             }
         }
+        
+       
+        [HttpGet]
+        public async Task<IActionResult> Get(){
+            try{
+                var result = await _service.GetAllLinhasAsync();
+                if (result == null) return NotFound("Nenhuma linha encontrada");
+
+                return Ok(result);
+            }catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao procurar as Linhas: {ex.Message} ");
+            }
+        }
+
+        [HttpGet("parada/{id}")]
+        public async Task<IActionResult> GetLinhasByParadas(long paradaId){
+            try {
+                
+                var result = await _service.FindAllLinhasByParadasAsync(paradaId);
+                if(result == null) return NotFound("Nenhuma linha encontrada");
+                return Ok(result);
+
+            }catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao procurar as Linhas: {ex.Message} ");
+            }
+        }
 
         [HttpPost]
         public async Task<IActionResult> Post(Linha linha){
             try{
                 var result = await _service.AddLinhaAsync(linha);
-                if(result == null) return BadRequest("Erro ao cadastrar a linha");
+                if(result == null) return BadRequest("Erro ao inserir a linha");
                 return Ok(result);
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao cadastrar a linha: {ex.Message} ");
+            }
+        }
+
+ 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(long id, Linha linha)
+        {
+            try
+            {
+                var result = await _service.UpdateLinhaAsync(id, linha);
+                if (result == null) return BadRequest("Erro em procurar as informações da Linha");
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro em atualizar as informações da Linha: {ex.Message} ");
+            }
+        }
+         [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(long id)
+        {
+            try
+            {
+                return await _service.DeleteLinhaAsync(id) ? 
+                    Ok("Deletado") : 
+                    BadRequest("Não foi possivel deletar a Linha");
+;
+            }catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao deletar a Linha: {ex.Message}");
             }
         }
     }

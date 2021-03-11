@@ -6,7 +6,7 @@ namespace TesteDesenvolvedor.Domain
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public long ParadaId { get; set; }
-        public List<Parada> Paradas { get; set; }
+        public List<LinhaParada> LinhasParadas { get; set; }
+        public List<Veiculo> Veiculos { get; set; }
     }
 }

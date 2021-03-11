@@ -92,13 +92,14 @@ namespace TesteDesenvolvedor.Services
             }
         }
 
-        public async Task<Veiculo> UpdateVeiculoAsync(long id, Veiculo Veiculo)
+        public async Task<Veiculo> UpdateVeiculoAsync(long id, Veiculo veiculo)
         {
             try{
                 var result = await _repository.FindByIdAsync(id);
                 if (result == null) throw new Exception("Veiculo não encontrado");
 
-                _repository.Update(result, Veiculo);
+                  veiculo.Id = result.Id;
+                _repository.Update(veiculo);
                 if(await _repository.SaveChangesAsync()){
                     return await _repository.FindByIdAsync(id);
                 }

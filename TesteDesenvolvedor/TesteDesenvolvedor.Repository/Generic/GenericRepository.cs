@@ -19,9 +19,9 @@ namespace TesteDesenvolvedor.Repository.Generic
             _context.Add(entity);
         }
 
-        public void Update<T>(T item, T entity) where T : class
+        public void Update<T>(T entity) where T : class
         {
-            _context.Entry(item).CurrentValues.SetValues(entity);
+            _context.Update(entity);
         }
 
         public void Delete<T>(T entity) where T : class

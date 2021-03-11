@@ -1,4 +1,6 @@
-﻿namespace TesteDesenvolvedor.Domain
+﻿using System.Collections.Generic;
+
+namespace TesteDesenvolvedor.Domain
 {
     public class Parada
     {
@@ -6,5 +8,6 @@
         public string Name { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public List<LinhaParada> LinhaParadas {get; set;}
     }
 }

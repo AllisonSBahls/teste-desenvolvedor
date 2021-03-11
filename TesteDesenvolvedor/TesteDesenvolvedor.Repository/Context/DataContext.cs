@@ -9,6 +9,7 @@ namespace TesteDesenvolvedor.Repository.Context
 
         public DbSet<Parada> Paradas { get; set; }
         public DbSet<Linha> Linhas { get; set; }
+        public DbSet<LinhaParada> LinhasParadas { get; set; }
         public DbSet<PosicaoVeiculo> PosicaoVeiculos { get; set; }
         public DbSet<Veiculo> Veiculos { get; set; }
 
@@ -17,6 +18,9 @@ namespace TesteDesenvolvedor.Repository.Context
                 builder.HasNoKey();
                 builder.ToTable("PosicaoVeiculos");
             });
+
+            modelBuilder.Entity<LinhaParada>()
+                .HasKey(LP => new {LP.LinhaId, LP.ParadaId});
         }
 
     }

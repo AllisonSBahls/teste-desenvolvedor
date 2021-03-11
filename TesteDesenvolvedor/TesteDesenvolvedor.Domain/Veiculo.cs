@@ -7,5 +7,6 @@
         public string Modelo { get; set; }
         public long LinhaId { get; set; }
         public Linha Linha { get; set; }
+
     }
 }
