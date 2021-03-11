@@ -6,10 +6,10 @@ namespace TesteDesenvolvedor.Services.Interface
 {
     public interface IPosicaoVeiculoService
     {
-         Task<PosicaoVeiculo> FindByIdPosicaoVeiculoAsync(long id);
+        Task<PosicaoVeiculo> FindByIdPosicaoVeiculoAsync(double id);
         Task<List<PosicaoVeiculo>> GetAllPosicaoVeiculosAsync();
         Task<PosicaoVeiculo> AddPosicaoVeiculoAsync(PosicaoVeiculo posicaoVeiculo);
-        Task<PosicaoVeiculo> UpdatePosicaoVeiculoAsync(long id, PosicaoVeiculo posicaoVeiculo);
-        Task<PosicaoVeiculo> DeletePosicaoVeiculoAsync(long id);
+        Task<PosicaoVeiculo> UpdatePosicaoVeiculoAsync(double id, PosicaoVeiculo posicaoVeiculo);
+        Task<bool> DeletePosicaoVeiculoAsync(double id);
     }
 }

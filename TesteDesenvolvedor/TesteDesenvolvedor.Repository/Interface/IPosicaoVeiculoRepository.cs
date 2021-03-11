@@ -7,7 +7,7 @@ namespace TesteDesenvolvedor.Repository.Interface
 {
     public interface IPosicaoVeiculoRepository : IRepository
     {
-        Task<PosicaoVeiculo> FindByIdAsync(long veiculoId);
+        Task<PosicaoVeiculo> FindByIdAsync(double veiculoId);
         Task<List<PosicaoVeiculo>> GetAllAsync();
     }
 }

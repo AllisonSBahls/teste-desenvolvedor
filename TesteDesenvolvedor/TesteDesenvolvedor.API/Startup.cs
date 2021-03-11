@@ -13,6 +13,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using TesteDesenvolvedor.Repository.Context;
 using Microsoft.EntityFrameworkCore;
+using TesteDesenvolvedor.Services.Interface;
+using TesteDesenvolvedor.Services;
+using TesteDesenvolvedor.Repository.Generic;
+using TesteDesenvolvedor.Repository.Interface;
+using TesteDesenvolvedor.Repository;
 
 namespace TesteDesenvolvedor.API
 {
@@ -32,6 +37,20 @@ namespace TesteDesenvolvedor.API
             services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection")));
 
             services.AddControllers();
+
+            services.AddScoped<IParadaService, ParadaService>();
+            services.AddScoped<ILinhaService, LinhaService>();
+            services.AddScoped<IVeiculoService, VeiculoService>();
+            services.AddScoped<IPosicaoVeiculoService, PosicaoVeiculoService>();
+
+
+            services.AddScoped(typeof(IRepository), typeof(GenericRepository));
+            services.AddScoped(typeof(IParadaRepository), typeof(ParadaRepository));
+            services.AddScoped(typeof(IVeiculoRepository), typeof(VeiculoRepository));    
+            services.AddScoped(typeof(ILinhaRepository), typeof(LinhaRepository));    
+            services.AddScoped(typeof(IPosicaoVeiculoRepository), typeof(PosicaoVeiculoRepository));    
+            
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { 

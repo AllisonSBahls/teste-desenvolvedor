@@ -32,13 +32,13 @@ namespace TesteDesenvolvedor.Services
         }
 
 
-        public async Task<Parada> AddParadaAsync(Parada Parada)
+        public async Task<Parada> AddParadaAsync(Parada parada)
         {
             try
             {
-                _repository.Add(Parada);
+                _repository.Add(parada);
                 return await _repository.SaveChangesAsync() ?
-                    await _repository.FindByIdAsync(Parada.Id) :
+                    await _repository.FindByIdAsync(parada.Id) :
                     null;
 
             }
