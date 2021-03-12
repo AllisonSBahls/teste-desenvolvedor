@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using TesteDesenvolvedor.Domain;
 using TesteDesenvolvedor.Repository.Interface;
+using TesteDesenvolvedor.Services.DTOs;
 using TesteDesenvolvedor.Services.Interface;
 
 namespace TesteDesenvolvedor.Services
@@ -10,19 +12,22 @@ namespace TesteDesenvolvedor.Services
     public class VeiculoService : IVeiculoService
     {
          private readonly IVeiculoRepository _repository;
-        public VeiculoService(IVeiculoRepository repository)
+         private readonly IMapper _mapper;
+
+        public VeiculoService(IVeiculoRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public async Task<Veiculo> FindByIdVeiculoAsync(long id)
+        public async Task<VeiculoDTO> FindByIdVeiculoAsync(long id)
         {
             try
             {
                 var result = await _repository.FindByIdAsync(id);
                 if (result == null) return null;
 
-                return result;
+                return _mapper.Map<VeiculoDTO>(result);
 
             }
             catch (Exception ex)
@@ -32,13 +37,14 @@ namespace TesteDesenvolvedor.Services
         }
 
 
-        public async Task<Veiculo> AddVeiculoAsync(Veiculo veiculo)
+        public async Task<VeiculoDTO> AddVeiculoAsync(VeiculoDTO veiculoDTO)
         {
             try
             {
+                var veiculo = _mapper.Map<Veiculo>(veiculoDTO);
                 _repository.Add(veiculo);
                 return await _repository.SaveChangesAsync() ?
-                    await _repository.FindByIdAsync(veiculo.Id) :
+                    _mapper.Map<VeiculoDTO>(await _repository.FindByIdAsync(veiculo.Id)) :
                     null;
 
             }
@@ -63,14 +69,14 @@ namespace TesteDesenvolvedor.Services
             }
         }
 
-        public async Task<List<Veiculo>> FindAllVeiculosByLinhasAsync(long linhaId)
+        public async Task<List<VeiculoDTO>> FindAllVeiculosByLinhasAsync(long linhaId)
         {
            try{
 
                var result = await _repository.FindAllVeiculosByLinhasAsync(linhaId);
                if (result == null) return null;
-               return result;
-
+               return _mapper.Map<List<VeiculoDTO>>(result);
+               
            }catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -78,13 +84,13 @@ namespace TesteDesenvolvedor.Services
         }
 
 
-        public async Task<List<Veiculo>> GetAllVeiculosAsync()
+        public async Task<List<VeiculoDTO>> GetAllVeiculosAsync()
         {
            try{
                
                var result = await _repository.GetAllAsync();
                if (result == null) return null;
-               return result;
+               return _mapper.Map<List<VeiculoDTO>>(result);
 
            }catch (Exception ex)
             {
@@ -92,16 +98,17 @@ namespace TesteDesenvolvedor.Services
             }
         }
 
-        public async Task<Veiculo> UpdateVeiculoAsync(long id, Veiculo veiculo)
+        public async Task<VeiculoDTO> UpdateVeiculoAsync(long id, VeiculoDTO veiculoDTO)
         {
             try{
+                var veiculo = _mapper.Map<Veiculo>(veiculoDTO);
                 var result = await _repository.FindByIdAsync(id);
                 if (result == null) throw new Exception("Veiculo não encontrado");
 
                 veiculo.Id = result.Id;
                 _repository.Update(veiculo);
                 if(await _repository.SaveChangesAsync()){
-                    return await _repository.FindByIdAsync(id);
+                    return _mapper.Map<VeiculoDTO>(await _repository.FindByIdAsync(id));
                 }
                 return null;
             }catch (Exception ex)

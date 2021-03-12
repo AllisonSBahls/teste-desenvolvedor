@@ -15,7 +15,9 @@ namespace TesteDesenvolvedor.Repository
 
         public async Task<Linha> FindByIdAsync(long id)
         {
-            var result = await _context.Linhas.AsNoTracking()
+            var result = await _context.Linhas.Include(x => x.LinhasParadas)
+                    .ThenInclude(p => p.Parada)
+                    .Include(v => v.Veiculos).AsNoTracking()
                    .SingleOrDefaultAsync(l => l.Id.Equals(id));
             return result;
         }
@@ -34,11 +36,12 @@ namespace TesteDesenvolvedor.Repository
         {
             var result = await (from linha in _context.Linhas
                 join linhasParadas in _context.LinhasParadas
-                on linha.Id equals linhasParadas.LinhaId 
+                on linha.Id equals linhasParadas.LinhaId
                 where linhasParadas.ParadaId == paradaId
                 select new Linha{
                     Id = linha.Id,
-                    Name = linha.Name
+                    Name = linha.Name,
+                    Veiculos = linha.Veiculos
                 }
                 ).ToListAsync();
           return result;

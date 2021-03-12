@@ -18,6 +18,7 @@ using TesteDesenvolvedor.Services;
 using TesteDesenvolvedor.Repository.Generic;
 using TesteDesenvolvedor.Repository.Interface;
 using TesteDesenvolvedor.Repository;
+using AutoMapper;
 
 namespace TesteDesenvolvedor.API
 {
@@ -40,6 +41,7 @@ namespace TesteDesenvolvedor.API
                 .AddNewtonsoftJson( 
                     x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
+            services.AddAutoMapper();
 
             services.AddScoped<IParadaService, ParadaService>();
             services.AddScoped<ILinhaService, LinhaService>();

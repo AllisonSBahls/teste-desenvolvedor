@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using TesteDesenvolvedor.Domain;
 using TesteDesenvolvedor.Repository.Interface;
+using TesteDesenvolvedor.Services.DTOs;
 using TesteDesenvolvedor.Services.Interface;
 
 namespace TesteDesenvolvedor.Services
@@ -10,19 +12,21 @@ namespace TesteDesenvolvedor.Services
     public class ParadaService : IParadaService
     {
          private readonly IParadaRepository _repository;
-        public ParadaService(IParadaRepository repository)
+         private readonly IMapper _mapper;
+        public ParadaService(IParadaRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public async Task<Parada> FindByIdParadaAsync(long id)
+        public async Task<ParadaDTO> FindByIdParadaAsync(long id)
         {
             try
             {
                 var result = await _repository.FindByIdAsync(id);
                 if (result == null) return null;
 
-                return result;
+                return _mapper.Map<ParadaDTO>(result);
 
             }
             catch (Exception ex)
@@ -32,13 +36,14 @@ namespace TesteDesenvolvedor.Services
         }
 
 
-        public async Task<Parada> AddParadaAsync(Parada parada)
+        public async Task<ParadaDTO> AddParadaAsync(Parada parada)
         {
             try
             {
+                // var parada = _mapper.Map<Parada>(paradaDTO);
                 _repository.Add(parada);
                 return await _repository.SaveChangesAsync() ?
-                    await _repository.FindByIdAsync(parada.Id) :
+                    _mapper.Map<ParadaDTO>(await _repository.FindByIdAsync(parada.Id)):
                     null;
 
             }
@@ -63,13 +68,13 @@ namespace TesteDesenvolvedor.Services
             }
         }
 
-        public async Task<List<Parada>> GetAllParadasAsync()
+        public async Task<List<ParadaDTO>> GetAllParadasAsync()
         {
            try{
                
                var result = await _repository.GetAllAsync();
                if (result == null) return null;
-               return result;
+               return _mapper.Map<List<ParadaDTO>>(result);;
 
            }catch (Exception ex)
             {
@@ -77,9 +82,10 @@ namespace TesteDesenvolvedor.Services
             }
         }
 
-        public async Task<Parada> UpdateParadaAsync(long id, Parada parada)
+        public async Task<ParadaDTO> UpdateParadaAsync(long id, ParadaDTO paradaDTO)
         {
             try{
+                var parada = _mapper.Map<Parada>(paradaDTO);
                 var result = await _repository.FindByIdAsync(id);
                                 Console.WriteLine(result.Name);
 
@@ -88,7 +94,7 @@ namespace TesteDesenvolvedor.Services
                 parada.Id = result.Id;
                 _repository.Update(parada);
                 if(await _repository.SaveChangesAsync()){
-                    return await _repository.FindByIdAsync(id);
+                    return _mapper.Map<ParadaDTO>(await _repository.FindByIdAsync(id));
                 }
                 return null;
             }catch (Exception ex)

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TesteDesenvolvedor.Domain;
+using TesteDesenvolvedor.Services.DTOs;
 using TesteDesenvolvedor.Services.Interface;
 
 namespace TesteDesenvolvedor.API.Controllers
@@ -66,11 +67,11 @@ namespace TesteDesenvolvedor.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Veiculo veiculo)
+        public async Task<IActionResult> Post(VeiculoDTO veiculoDTO)
         {
             try
             {
-                var result = await _service.AddVeiculoAsync(veiculo);
+                var result = await _service.AddVeiculoAsync(veiculoDTO);
                 if (result == null) return BadRequest("Erro ao cadastrar o Veiculo");
                 return Ok(result);
             }
@@ -81,11 +82,11 @@ namespace TesteDesenvolvedor.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(long id, Veiculo veiculo)
+        public async Task<IActionResult> Put(long id, VeiculoDTO veiculoDTO)
         {
             try
             {
-                var result = await _service.UpdateVeiculoAsync(id, veiculo);
+                var result = await _service.UpdateVeiculoAsync(id, veiculoDTO);
                 if (result == null) return BadRequest("Erro em alterar os dados do Veiculo");
 
                 return Ok(result);

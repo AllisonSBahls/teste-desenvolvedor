@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TesteDesenvolvedor.Domain;
+using TesteDesenvolvedor.Services.DTOs;
 using TesteDesenvolvedor.Services.Interface;
 
 namespace TesteDesenvolvedor.API.Controllers
@@ -58,11 +59,11 @@ namespace TesteDesenvolvedor.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(long id, Parada parada)
+        public async Task<IActionResult> Put(long id, ParadaDTO paradaDTO)
         {
             try
             {
-                var result = await _service.UpdateParadaAsync(id, parada);
+                var result = await _service.UpdateParadaAsync(id, paradaDTO);
                 if (result == null) return BadRequest("Erro em alterar os dados da Parada");
 
                 return Ok(result);

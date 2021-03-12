@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TesteDesenvolvedor.Domain;
+using TesteDesenvolvedor.Services.DTOs;
 
 namespace TesteDesenvolvedor.Services.Interface
 {
     public interface IVeiculoService
     {
-         Task<Veiculo> FindByIdVeiculoAsync(long id);
-        Task<List<Veiculo>> GetAllVeiculosAsync();
-        Task<Veiculo> AddVeiculoAsync(Veiculo veiculo);
-        Task<Veiculo> UpdateVeiculoAsync(long id, Veiculo veiculo);
+         Task<VeiculoDTO> FindByIdVeiculoAsync(long id);
+        Task<List<VeiculoDTO>> GetAllVeiculosAsync();
+        Task<VeiculoDTO> AddVeiculoAsync(VeiculoDTO veiculoDTO);
+        Task<VeiculoDTO> UpdateVeiculoAsync(long id, VeiculoDTO veiculoDTO);
         Task<bool> DeleteVeiculoAsync(long id);
-        Task<List<Veiculo>> FindAllVeiculosByLinhasAsync(long linhaId);
+        Task<List<VeiculoDTO>> FindAllVeiculosByLinhasAsync(long linhaId);
     }
 }

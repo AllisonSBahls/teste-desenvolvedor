@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TesteDesenvolvedor.Domain;
+using TesteDesenvolvedor.Services.DTOs;
 using TesteDesenvolvedor.Services.Interface;
 
 namespace TesteDesenvolvedor.API.Controllers
@@ -49,7 +50,7 @@ namespace TesteDesenvolvedor.API.Controllers
         public async Task<IActionResult> GetLinhasByParadas(long paradaId){
             try {
                 var result = await _service.FindAllLinhasByParadasAsync(paradaId);
-                if(result == null) return NotFound("Nenhuma linha encontrada");
+                if(result == null) return NotFound("Nenhuma Linha encontrada");
                 return Ok(result);
 
             }catch (Exception ex)
@@ -73,18 +74,18 @@ namespace TesteDesenvolvedor.API.Controllers
 
  
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(long id, Linha linha)
+        public async Task<IActionResult> Put(long id, LinhaDTO linhaDTO)
         {
             try
             {
-                var result = await _service.UpdateLinhaAsync(id, linha);
+                var result = await _service.UpdateLinhaAsync(id, linhaDTO);
                 if (result == null) return BadRequest("Erro em procurar as informações da Linha");
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro em atualizar as informações da Linha: {ex.Message} ");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao atualizar as informações da Linha: {ex.Message} ");
             }
         }
          [HttpDelete("{id}")]

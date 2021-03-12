@@ -15,13 +15,19 @@ namespace TesteDesenvolvedor.Repository
         
         public async Task<Parada> FindByIdAsync(long id)
         {
-            var result = await _context.Paradas.AsNoTracking().SingleOrDefaultAsync(p => p.Id.Equals(id));
+            var result = await _context.Paradas
+                        .Include(lp => lp.LinhaParadas)
+                            .ThenInclude(l => l.Linha).AsNoTracking()
+                            .SingleOrDefaultAsync(p => p.Id.Equals(id));
             return result;
         }
 
         public async Task<List<Parada>> GetAllAsync()
         {
-            var result = await _context.Paradas.ToListAsync();
+            var result = await _context.Paradas
+                        .Include(lp => lp.LinhaParadas)
+                            .ThenInclude(l => l.Linha).
+                            AsNoTracking().ToListAsync();
             return result;
         }
     }

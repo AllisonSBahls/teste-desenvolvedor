@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TesteDesenvolvedor.Domain;
+using TesteDesenvolvedor.Services.DTOs;
 
 namespace TesteDesenvolvedor.Services.Interface
 {
     public interface IParadaService
     {
-        Task<Parada> FindByIdParadaAsync(long id);
-        Task<List<Parada>> GetAllParadasAsync();
-        Task<Parada> AddParadaAsync(Parada parada);
-        Task<Parada> UpdateParadaAsync(long id, Parada parada);
+        Task<ParadaDTO> FindByIdParadaAsync(long id);
+        Task<List<ParadaDTO>> GetAllParadasAsync();
+        Task<ParadaDTO> AddParadaAsync(Parada parada);
+        Task<ParadaDTO> UpdateParadaAsync(long id, ParadaDTO parada);
         Task<bool> DeleteParadaAsync(long id);
     }
 }

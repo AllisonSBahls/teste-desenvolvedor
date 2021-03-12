@@ -1,4 +1,6 @@
-﻿namespace TesteDesenvolvedor.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TesteDesenvolvedor.Domain
 {
     public class Veiculo
     {
