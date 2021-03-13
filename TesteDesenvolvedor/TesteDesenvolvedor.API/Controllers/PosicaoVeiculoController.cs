@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TesteDesenvolvedor.Domain;
+using TesteDesenvolvedor.Services.DTOs;
 using TesteDesenvolvedor.Services.Interface;
 
 namespace TesteDesenvolvedor.API.Controllers
@@ -18,10 +19,10 @@ namespace TesteDesenvolvedor.API.Controllers
             _service = service;
         }
         
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(long id){
+        [HttpGet("{veiculoId}")]
+        public async Task<IActionResult> Get(long veiculoId){
             try{
-                var result = await _service.FindByIdPosicaoVeiculoAsync(id);
+                var result = await _service.FindByIdPosicaoVeiculoAsync(veiculoId);
                 if (result == null) return NotFound("Posicao do Veiculo não encontrada");
 
                 return Ok(result);
@@ -46,9 +47,9 @@ namespace TesteDesenvolvedor.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(PosicaoVeiculo posicaoVeiculo){
+        public async Task<IActionResult> Post(PosicaoVeiculoDTO posicaoVeiculoDTO){
             try{
-                var result = await _service.AddPosicaoVeiculoAsync(posicaoVeiculo);
+                var result = await _service.AddPosicaoVeiculoAsync(posicaoVeiculoDTO);
                 if(result == null) return BadRequest("Erro ao inserir a PosicaoVeiculo");
                 return Ok(result);
             }
@@ -59,12 +60,12 @@ namespace TesteDesenvolvedor.API.Controllers
         }
 
  
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(long id, PosicaoVeiculo PosicaoVeiculo)
+        [HttpPut("{veiculoId}")]
+        public async Task<IActionResult> Put(long veiculoId, PosicaoVeiculoDTO posicaoVeiculoDTO)
         {
             try
             {
-                var result = await _service.UpdatePosicaoVeiculoAsync(id, PosicaoVeiculo);
+                var result = await _service.UpdatePosicaoVeiculoAsync(veiculoId, posicaoVeiculoDTO);
                 if (result == null) return BadRequest("Erro em procurar as informações da PosicaoVeiculo");
 
                 return Ok(result);
@@ -74,12 +75,12 @@ namespace TesteDesenvolvedor.API.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro em atualizar as informações da PosicaoVeiculo: {ex.Message} ");
             }
         }
-         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(long id)
+         [HttpDelete("{veiculoId}")]
+        public async Task<IActionResult> Delete(long veiculoId)
         {
             try
             {
-                return await _service.DeletePosicaoVeiculoAsync(id) ? 
+                return await _service.DeletePosicaoVeiculoAsync(veiculoId) ? 
                     Ok("Deletado") : 
                     BadRequest("Não foi possivel deletar a PosicaoVeiculo");
 ;

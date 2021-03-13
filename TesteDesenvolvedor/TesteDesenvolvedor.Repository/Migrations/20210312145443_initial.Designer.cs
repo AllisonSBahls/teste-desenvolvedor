@@ -8,7 +8,7 @@ using TesteDesenvolvedor.Repository.Context;
 namespace TesteDesenvolvedor.Repository.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210311182943_initial")]
+    [Migration("20210312145443_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,6 +69,10 @@ namespace TesteDesenvolvedor.Repository.Migrations
 
             modelBuilder.Entity("TesteDesenvolvedor.Domain.PosicaoVeiculo", b =>
                 {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
                     b.Property<double>("Latitude")
                         .HasColumnType("double");
 
@@ -78,7 +82,10 @@ namespace TesteDesenvolvedor.Repository.Migrations
                     b.Property<long>("VeiculoId")
                         .HasColumnType("bigint");
 
-                    b.HasIndex("VeiculoId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("VeiculoId")
+                        .IsUnique();
 
                     b.ToTable("PosicaoVeiculos");
                 });
@@ -123,8 +130,8 @@ namespace TesteDesenvolvedor.Repository.Migrations
             modelBuilder.Entity("TesteDesenvolvedor.Domain.PosicaoVeiculo", b =>
                 {
                     b.HasOne("TesteDesenvolvedor.Domain.Veiculo", "Veiculo")
-                        .WithMany()
-                        .HasForeignKey("VeiculoId")
+                        .WithOne("PosicaoVeiculo")
+                        .HasForeignKey("TesteDesenvolvedor.Domain.PosicaoVeiculo", "VeiculoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

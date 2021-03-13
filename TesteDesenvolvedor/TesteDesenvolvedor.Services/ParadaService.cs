@@ -102,5 +102,21 @@ namespace TesteDesenvolvedor.Services
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<List<ParadaDTO>> FindParadaByPosicao(double lat, double lng, double distance)
+        {
+            try
+            {
+                double distanceDefault = distance == 0 ?  5 : distance;
+                var result = await _repository.FindParadaByPosicao(lat, lng, distanceDefault);
+                if (result == null) return null;
+
+                return _mapper.Map<List<ParadaDTO>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

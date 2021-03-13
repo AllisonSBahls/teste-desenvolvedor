@@ -18,28 +18,44 @@ namespace TesteDesenvolvedor.API.Controllers
         {
             _service = service;
         }
-        
+
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(long id){
-            try{
+        public async Task<IActionResult> Get(long id) {
+            try {
                 var result = await _service.FindByIdParadaAsync(id);
                 if (result == null) return NotFound("Parada não encontrada");
 
                 return Ok(result);
-            }catch (Exception ex)
+            } catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao procurar a Parada: {ex.Message} ");
             }
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(){
-            try{
+        public async Task<IActionResult> Get() {
+            try {
                 var result = await _service.GetAllParadasAsync();
                 if (result == null) return NotFound("Nenhuma parada encontrada");
 
                 return Ok(result);
-            }catch (Exception ex)
+            } catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao procurar as Paradas: {ex.Message} ");
+            }
+        }
+
+        [HttpGet("posicao")]
+        public async Task<IActionResult> Get([FromQuery] double latitude, [FromQuery] double longitude, [FromQuery] double distance)
+        {
+            try
+            {
+                var result = await _service.FindParadaByPosicao(latitude, longitude, distance);
+                if (result == null) return NotFound("Nenhuma Parada encontrada, por favor aumente a distancia de procura");
+
+                return Ok(result);
+            }
+            catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno ao procurar as Paradas: {ex.Message} ");
             }

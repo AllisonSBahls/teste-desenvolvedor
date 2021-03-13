@@ -84,12 +84,15 @@ namespace TesteDesenvolvedor.Repository.Migrations
                 name: "PosicaoVeiculos",
                 columns: table => new
                 {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Latitude = table.Column<double>(nullable: false),
                     Longitude = table.Column<double>(nullable: false),
                     VeiculoId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_PosicaoVeiculos", x => x.Id);
                     table.ForeignKey(
                         name: "FK_PosicaoVeiculos_Veiculos_VeiculoId",
                         column: x => x.VeiculoId,
@@ -106,7 +109,8 @@ namespace TesteDesenvolvedor.Repository.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_PosicaoVeiculos_VeiculoId",
                 table: "PosicaoVeiculos",
-                column: "VeiculoId");
+                column: "VeiculoId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Veiculos_LinhaId",

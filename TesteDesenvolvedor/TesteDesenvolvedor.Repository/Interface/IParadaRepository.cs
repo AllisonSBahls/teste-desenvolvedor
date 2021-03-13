@@ -9,5 +9,8 @@ namespace TesteDesenvolvedor.Repository.Interface
     {
         Task<Parada> FindByIdAsync(long id);
         Task<List<Parada>> GetAllAsync();
+
+        Task<List<Parada>> FindParadaByPosicao(double lat, double lng, double distance);
+
     }
 }

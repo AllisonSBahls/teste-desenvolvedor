@@ -15,13 +15,15 @@ namespace TesteDesenvolvedor.Repository
         
         public async Task<Veiculo> FindByIdAsync(long id)
         {
-            var result = await _context.Veiculos.AsNoTracking().SingleOrDefaultAsync(l => l.Id.Equals(id));
+            var result = await _context.Veiculos
+                .Include(pv => pv.PosicaoVeiculo).AsNoTracking()
+                .SingleOrDefaultAsync(l => l.Id.Equals(id));
             return result;
         }
 
         public async Task<List<Veiculo>> GetAllAsync()
         {
-            var result = await _context.Veiculos.Include(p => p.Linha).AsNoTracking().ToListAsync();
+            var result = await _context.Veiculos.Include(p => p.Linha).Include(pv => pv.PosicaoVeiculo).AsNoTracking().ToListAsync();
             return result;
         }
 
@@ -29,6 +31,7 @@ namespace TesteDesenvolvedor.Repository
         {
             var result = await _context.Veiculos
                     .Include(p => p.Linha)
+                    .Include(pv => pv.PosicaoVeiculo)
                     .Where(p => p.LinhaId.Equals(linhaId)).AsNoTracking()
                     .ToListAsync();
             return result;

@@ -10,6 +10,7 @@ namespace TesteDesenvolvedor.Services.Interface
         Task<ParadaDTO> FindByIdParadaAsync(long id);
         Task<List<ParadaDTO>> GetAllParadasAsync();
         Task<ParadaDTO> AddParadaAsync(Parada parada);
+        Task<List<ParadaDTO>> FindParadaByPosicao(double lat, double lng, double distance);
         Task<ParadaDTO> UpdateParadaAsync(long id, ParadaDTO parada);
         Task<bool> DeleteParadaAsync(long id);
     }

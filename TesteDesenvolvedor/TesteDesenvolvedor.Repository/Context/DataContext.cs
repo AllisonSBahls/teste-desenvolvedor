@@ -14,15 +14,13 @@ namespace TesteDesenvolvedor.Repository.Context
         public DbSet<Veiculo> Veiculos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
-            modelBuilder.Entity<PosicaoVeiculo>(builder => {
-                builder.HasNoKey();
-                builder.ToTable("PosicaoVeiculos");
-            });
 
             modelBuilder.Entity<LinhaParada>()
                 .HasKey(LP => new {LP.LinhaId, LP.ParadaId});
 
-            modelBuilder.Entity<Linha>().HasKey(g => new { g.Id });
+
+            modelBuilder.Entity<PosicaoVeiculo>().HasIndex(u => u.VeiculoId).IsUnique();
+
         }
 
     }

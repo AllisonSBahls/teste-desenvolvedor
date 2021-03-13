@@ -47,7 +47,8 @@ namespace TesteDesenvolvedor.API
             services.AddScoped<ILinhaService, LinhaService>();
             services.AddScoped<IVeiculoService, VeiculoService>();
             services.AddScoped<IPosicaoVeiculoService, PosicaoVeiculoService>();
-
+            
+            services.AddScoped<SeedingData>();
 
             services.AddScoped(typeof(IRepository), typeof(GenericRepository));
             services.AddScoped(typeof(IParadaRepository), typeof(ParadaRepository));
@@ -71,11 +72,12 @@ namespace TesteDesenvolvedor.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedingData seedingData)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                seedingData.Seed();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Teste de Desenvolvedor .NET AIKO"));
             }

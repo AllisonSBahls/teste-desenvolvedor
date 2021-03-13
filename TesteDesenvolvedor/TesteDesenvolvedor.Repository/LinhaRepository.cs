@@ -15,9 +15,7 @@ namespace TesteDesenvolvedor.Repository
 
         public async Task<Linha> FindByIdAsync(long id)
         {
-            var result = await _context.Linhas.Include(x => x.LinhasParadas)
-                    .ThenInclude(p => p.Parada)
-                    .Include(v => v.Veiculos).AsNoTracking()
+            var result = await _context.Linhas.AsNoTracking()
                    .SingleOrDefaultAsync(l => l.Id.Equals(id));
             return result;
         }

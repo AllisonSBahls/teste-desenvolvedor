@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using TesteDesenvolvedor.Domain;
 using TesteDesenvolvedor.Repository.Interface;
+using TesteDesenvolvedor.Services.DTOs;
 using TesteDesenvolvedor.Services.Interface;
 
 namespace TesteDesenvolvedor.Services
@@ -10,18 +12,21 @@ namespace TesteDesenvolvedor.Services
     public class PosicaoVeiculoService : IPosicaoVeiculoService
     {
           private readonly IPosicaoVeiculoRepository _repository;
-        public PosicaoVeiculoService(IPosicaoVeiculoRepository repository)
+          private readonly IMapper _mapper;
+
+        public PosicaoVeiculoService(IPosicaoVeiculoRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
-        public async Task<PosicaoVeiculo> FindByIdPosicaoVeiculoAsync(long veiculoId)
+        public async Task<PosicaoVeiculoDTO> FindByIdPosicaoVeiculoAsync(long veiculoId)
         {
             try
             {
-                var result = await _repository.FindByIdAsync(veiculoId);
+                var result = await _repository.FindByIdVeiculoAsync(veiculoId);
                 if (result == null) return null;
 
-                return result;
+                return _mapper.Map<PosicaoVeiculoDTO>(result);
 
             }
             catch (Exception ex)
@@ -31,13 +36,14 @@ namespace TesteDesenvolvedor.Services
         }
 
 
-        public async Task<PosicaoVeiculo> AddPosicaoVeiculoAsync(PosicaoVeiculo posicaoVeiculo)
+        public async Task<PosicaoVeiculoDTO> AddPosicaoVeiculoAsync(PosicaoVeiculoDTO posicaoVeiculoDTO)
         {
             try
             {
+                var posicaoVeiculo = _mapper.Map<PosicaoVeiculo>(posicaoVeiculoDTO);
                 _repository.Add(posicaoVeiculo);
                 return await _repository.SaveChangesAsync() ?
-                    await _repository.FindByIdAsync(posicaoVeiculo.VeiculoId) :
+                    _mapper.Map<PosicaoVeiculoDTO>(await _repository.FindByIdAsync(posicaoVeiculo.VeiculoId)) :
                     null;
 
             }
@@ -62,13 +68,13 @@ namespace TesteDesenvolvedor.Services
             }
         }
 
-        public async Task<List<PosicaoVeiculo>> GetAllPosicaoVeiculosAsync()
+        public async Task<List<PosicaoVeiculoDTO>> GetAllPosicaoVeiculosAsync()
         {
            try{
                
                var result = await _repository.GetAllAsync();
                if (result == null) return null;
-               return result;
+               return _mapper.Map<List<PosicaoVeiculoDTO>>(result);
 
            }catch (Exception ex)
             {
@@ -76,18 +82,23 @@ namespace TesteDesenvolvedor.Services
             }
         }
 
-        public async Task<PosicaoVeiculo> UpdatePosicaoVeiculoAsync(long veiculoId, PosicaoVeiculo posicaoVeiculo)
+        public async Task<PosicaoVeiculoDTO> UpdatePosicaoVeiculoAsync(long veiculoId, PosicaoVeiculoDTO posicaoVeiculoDTO)
         {
-            try{
-                var result = await _repository.FindByIdAsync(veiculoId);
-                if (result == null) throw new Exception("PosicaoVeiculo não encontrada");
 
-                posicaoVeiculo.VeiculoId = result.VeiculoId;
+            try
+            {
+                var posicaoVeiculo = _mapper.Map<PosicaoVeiculo>(posicaoVeiculoDTO);
+                var posicao = await _repository.FindByIdVeiculoAsync(veiculoId);
+                var result = await _repository.FindByIdAsync(posicao.Id);
+                if (result == null) throw new Exception("Posicao do Veiculo não encontrada");
+
+                posicaoVeiculo.Id = result.Id;
                 _repository.Update(posicaoVeiculo);
                 if(await _repository.SaveChangesAsync()){
-                    return await _repository.FindByIdAsync(veiculoId);
+                    return _mapper.Map<PosicaoVeiculoDTO>(await _repository.FindByIdVeiculoAsync(veiculoId));
                 }
                 return null;
+
             }catch (Exception ex)
             {
                 throw new Exception(ex.Message);

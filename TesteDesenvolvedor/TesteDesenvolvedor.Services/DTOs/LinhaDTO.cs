@@ -8,9 +8,9 @@ namespace TesteDesenvolvedor.Services.DTOs
     {   
         public long Id { get; set; }
         public string Name { get; set; }
-        public List<ParadaDTO> Paradas { get; set; }
-        public List<VeiculoDTO> Veiculos { get; set; }
+
     }
+
 
     public class LinhaParadasDTO
     {   
