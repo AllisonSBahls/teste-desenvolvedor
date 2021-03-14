@@ -11,6 +11,7 @@ namespace TesteDesenvolvedor.Repository.Interface
         Task<List<Parada>> GetAllAsync();
 
         Task<List<Parada>> FindParadaByPosicao(double lat, double lng, double distance);
+        
 
     }
 }

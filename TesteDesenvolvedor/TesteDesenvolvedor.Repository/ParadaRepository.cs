@@ -31,10 +31,8 @@ namespace TesteDesenvolvedor.Repository
         public async Task<List<Parada>> FindParadaByPosicao(double lat, double lng, double distance)
         {
             var result = await _context.Paradas
-                .FromSqlRaw(@"SELECT *, ( 3959 * acos( cos( radians({0}) ) * cos( radians( paradas.Latitude ) ) * cos(radians(longitude) - radians({1})) + sin(radians({0})) * sin(radians(latitude))) ) AS distance FROM paradas  HAVING distance < {2} ORDER BY distance", lat, lng, distance).ToListAsync();
-
+                .FromSqlRaw(@"SELECT *, ( 3959 * acos( cos( radians({0}) ) * cos( radians( paradas.Latitude ) ) * cos(radians(longitude) - radians({1})) + sin(radians({0})) * sin(radians(latitude))) ) AS distance FROM paradas HAVING distance < {2} ORDER BY distance", lat, lng, distance).ToListAsync();
             return result;
-         
                          
         }
 
