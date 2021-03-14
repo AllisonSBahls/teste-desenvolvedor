@@ -76,23 +76,64 @@ namespace TesteDesenvolvedor.Repository.Context
             LinhaParada lp21 = new LinhaParada{Linha = linha2, Parada = parada21};
             LinhaParada lp22 = new LinhaParada{Linha = linha2, Parada = parada22};
             LinhaParada lp23 = new LinhaParada{Linha = linha2, Parada = parada23};
-    
             Veiculo veiculo3 = new Veiculo {Name = "6001-10", Modelo = "MERCEDES BENZ", Linha = linha2};
             PosicaoVeiculo ps3 = new PosicaoVeiculo { Latitude = -23.64482675, Longitude = -46.718166499999995, Veiculo = veiculo3 };
 
-            _context.Linhas.AddRange(linha, linha2);
+
+            Linha linha3 = new Linha { Name = "LINHA N104-11 TERM. PIRITUBA / TERM. LAPA" };
+            Parada p = new Parada {Name = "FREGUESIA B/C", Latitude = -23.494786, Longitude = -46.708775};
+            Parada p1 = new Parada {Name = "MARGINAL B/C", Latitude = -23.511052, Longitude = -46.705493};
+            Parada p2 = new Parada {Name = "JOSE MARIA B/C", Latitude = -23.514036, Longitude = -46.702259};
+            Parada p3 = new Parada {Name = "ZANELLA B/C", Latitude = -23.516592, Longitude = -46.698575};
+            Parada p4 = new Parada {Name = "PINEL B/C", Latitude = -23.485948, Longitude = -46.724827};
+            Parada p5 = new Parada {Name = "GUERINO B/C", Latitude = -23.484536, Longitude = -46.722711};
+            Parada p6 = new Parada {Name = "MANOEL BARBOSA B/C", Latitude = -23.488228, Longitude = -46.713496};
+            Parada p7 = new Parada {Name = "CABO ADAO B/C", Latitude = -23.48431, Longitude = -46.716271};
+            Parada p8 = new Parada {Name = "PRAÇA YARA B/C", Latitude = -23.48246, Longitude = -46.717675};
+            Parada p9 = new Parada {Name = "MIGUEL DE CASTRO", Latitude = -23.482531, Longitude = -46.72085};
+            Parada p10 = new Parada {Name = "RIO VERDE B/C", Latitude = -23.490768, Longitude = -46.710252};
+            Parada p11 = new Parada {Name = "PETRONIO PORTELA B/C", Latitude = -23.498233, Longitude = -46.706861};
+            Parada p12 = new Parada {Name = "PAULA FERREIRA B/C", Latitude = -23.500896, Longitude = -46.706633};
+            Parada p13 = new Parada {Name = "PIQUERI B/C", Latitude = -23.50616, Longitude = -46.706061};
+            LinhaParada lp24 = new LinhaParada{Linha = linha3, Parada = p1};
+            LinhaParada lp25 = new LinhaParada{Linha = linha3, Parada = p2};
+            LinhaParada lp26 = new LinhaParada{Linha = linha3, Parada = p3};
+            LinhaParada lp27 = new LinhaParada{Linha = linha3, Parada = p4};
+            LinhaParada lp28 = new LinhaParada{Linha = linha3, Parada = p5};
+            LinhaParada lp29 = new LinhaParada{Linha = linha3, Parada = p6};
+            LinhaParada lp30 = new LinhaParada{Linha = linha3, Parada = p7};
+            LinhaParada lp31 = new LinhaParada{Linha = linha3, Parada = p8};
+            LinhaParada lp32 = new LinhaParada{Linha = linha3, Parada = p9};
+            LinhaParada lp33 = new LinhaParada{Linha = linha3, Parada = p10};
+            LinhaParada lp34 = new LinhaParada{Linha = linha3, Parada = p11};
+            LinhaParada lp35 = new LinhaParada{Linha = linha3, Parada = p12};
+            LinhaParada lp36 = new LinhaParada{Linha = linha3, Parada = p13};
+            Veiculo veiculo4 = new Veiculo {Name = "N104-11", Modelo = "MERCEDES BENZ", Linha = linha3};
+            PosicaoVeiculo ps4 = new PosicaoVeiculo { Latitude = -23.5198475, Longitude = -46.700419, Veiculo = veiculo4 };
+
+            Linha linha4 = new Linha { Name = "LINHA 178T-10 METRÔ SANTANA / CEASA"};
+            LinhaParada lp37 = new LinhaParada{Linha = linha4, Parada = p1};
+            LinhaParada lp38 = new LinhaParada{Linha = linha4, Parada = p2};
+            LinhaParada lp39 = new LinhaParada{Linha = linha4, Parada = p3};
+            LinhaParada lp40 = new LinhaParada{Linha = linha4, Parada = p12};
+            LinhaParada lp41 = new LinhaParada{Linha = linha4, Parada = p13};
+            Veiculo veiculo5 = new Veiculo {Name = "178T-10", Modelo = "MERCEDES BENZ", Linha = linha4};
+            PosicaoVeiculo ps5 = new PosicaoVeiculo { Latitude = -23.52803875, Longitude = -46.73361125, Veiculo = veiculo5 };
+
+            _context.Linhas.AddRange(linha, linha2, linha3, linha4);
 
             _context.Paradas.AddRange(parada, parada1, parada2, parada3, parada4, parada5, parada6,parada7, parada8,
             parada9, parada10,parada11,parada12,parada13,parada14,parada15,parada16,parada17,parada18,parada19,parada20,
-            parada21,parada22,parada23);
+            parada21,parada22,parada23, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11,p12,p13);
 
             _context.LinhasParadas.AddRange(lp, lp1, lp2, lp3, lp4, lp5, lp6,lp7, lp8,
             lp9, lp10,lp11,lp12,lp13,lp14,lp15,lp16,lp17,lp18,lp19,lp20,
-            lp21,lp22,lp23);
+            lp21,lp22,lp23, lp24, lp25, lp26, lp27, lp28,lp29,lp30,lp31,lp32,lp33,lp34,lp35,lp36,lp37,lp38,lp39,lp40,
+            lp41);
 
-            _context.Veiculos.AddRange(veiculo, veiculo2, veiculo3);
+            _context.Veiculos.AddRange(veiculo, veiculo2, veiculo3, veiculo4, veiculo5);
 
-            _context.PosicaoVeiculos.AddRange(ps, ps2, ps3);
+            _context.PosicaoVeiculos.AddRange(ps, ps2, ps3, ps4, ps5);
 
             _context.SaveChanges();
         }
